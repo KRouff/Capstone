@@ -25,8 +25,8 @@ for i in "${filesystems[@]}"; do
     # Get disk usage percentage
     usage=$(df -h "$i" | tail -n 1 | awk '{print $5}' | cut -d % -f1)
 
-    # Check if disk usage is over 90%
-    if [ $usage -ge 0 ]; then
+    # Check if disk usage is over 50%
+    if [ $usage -ge 50 ]; then
         alert="Running out of space on $i, Usage is: $usage%"
         echo "Alert: $alert"
         DISPLAY=:0 notify-send "Disk Space Alert" "$alert"
