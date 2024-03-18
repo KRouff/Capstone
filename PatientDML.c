@@ -126,7 +126,7 @@ void updateExistingPatient() {
 void searchPatientRecords() {
     // Input variable for search term
     char searchTerm[100];
-    printf("Enter search term (name, ID, etc.): ");
+    printf("Enter search term (First name, Last Name or ID): ");
     scanf("%s", searchTerm);
 
     // Constructing and executing query to search for patients based on search term
