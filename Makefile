@@ -20,7 +20,7 @@ L_OBJS = EmergencyContactsDML.o
 M_OBJS = TestResultsDML.o
 
 #Target that builds all parts of the project
-all: hospitalDatabase PatientCSV PatientDML DoctorCSV DoctorDML AppointmentsCSV AppointmentsDML MainMenu TestResultsCSV EmergencyContactsCSV BillingDML TestResultsDML EmergencyContactsDML
+all: hospitalDatabase PatientCSV PatientDML DoctorCSV DoctorDML AppointmentsCSV AppointmentsDML MainMenu TestResultsCSV EmergencyContactsCSV TestResultsDML EmergencyContactsDML
 
 #Target that builds only the database-related parts
 database: hospitalDatabase PatientCSV DoctorCSV AppointmentsCSV TestResultsCSV EmergencyContactsCSV
