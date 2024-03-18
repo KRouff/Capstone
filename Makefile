@@ -16,11 +16,10 @@ G_OBJS = AppointmentsDML.o
 H_OBJS = MainMenu.o
 I_OBJS = EmergencyContactsCSV.o
 J_OBJS = TestResultsCSV.o
-L_OBJS = EmergencyContactsDML.o
 M_OBJS = TestResultsDML.o
 
 #Target that builds all parts of the project
-all: hospitalDatabase PatientCSV PatientDML DoctorCSV DoctorDML AppointmentsCSV AppointmentsDML MainMenu TestResultsCSV EmergencyContactsCSV TestResultsDML EmergencyContactsDML
+all: hospitalDatabase PatientCSV PatientDML DoctorCSV DoctorDML AppointmentsCSV AppointmentsDML MainMenu TestResultsCSV EmergencyContactsCSV TestResultsDML
 
 #Target that builds only the database-related parts
 database: hospitalDatabase PatientCSV DoctorCSV AppointmentsCSV TestResultsCSV EmergencyContactsCSV
@@ -59,9 +58,6 @@ EmergencyContactsCSV: $(I_OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 TestResultsCSV: $(J_OBJS)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
-
-EmergencyContactsDML: $(L_OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 TestResultsDML: $(M_OBJS)
