@@ -19,7 +19,7 @@ fi
 
 
 # Define the filesystems to monitor
-filesystems=("/home/student/Capstone")
+filesystems=("/home/student")
 
 for i in "${filesystems[@]}"; do
     # Get disk usage percentage
