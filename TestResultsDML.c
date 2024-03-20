@@ -9,8 +9,9 @@
 #define DB_PASSWORD "student"
 #define DB_NAME "hospital"
 
-MYSQL *conn;
+MYSQL *conn; // MySQL connection object
 
+// Execute a MySQL query and handle any errors
 void execute_query(const char *query) {
     if (mysql_query(conn, query)) {
         fprintf(stderr, "Query execution error: %s\n", mysql_error(conn));
@@ -19,10 +20,12 @@ void execute_query(const char *query) {
     }
 }
 
+// Function to enter test results into the database
 void enterTestResults() {
     int patientID, doctorID;
     char testType[255], result[255], testDate[11];
 
+     // Get input from user
     printf("Enter Patient ID: ");
     scanf("%d", &patientID);
     printf("Enter Doctor ID: ");
@@ -34,6 +37,7 @@ void enterTestResults() {
     printf("Enter Test Date (YYYY-MM-DD): ");
     scanf("%s", testDate);
 
+    // Construct and execute the SQL query
     char insertQuery[1024];
     snprintf(insertQuery, sizeof(insertQuery),
              "INSERT INTO TestResults (PatientID, DoctorID, TestType, Result, TestDate) "
@@ -44,16 +48,20 @@ void enterTestResults() {
     printf("Test results entered successfully!\n");
 }
 
+ // Function to retrieve test results from the database
 void retrieveTestResults() {
     int patientID;
 
+     // Get input from user
     printf("Enter Patient ID to retrieve results: ");
     scanf("%d", &patientID);
 
+     // Construct and execute the SQL query
     char selectQuery[512];
     snprintf(selectQuery, sizeof(selectQuery),
              "SELECT * FROM TestResults WHERE PatientID = %d", patientID);
 
+     // Print the retrieved test results
     execute_query(selectQuery);
     MYSQL_RES *result = mysql_use_result(conn);
     if (result) {
@@ -70,18 +78,21 @@ void retrieveTestResults() {
 }
 
 int main() {
+    // Initialize MySQL connection
     conn = mysql_init(NULL);
     if (!conn) {
         fprintf(stderr, "Error initializing MySQL: %s\n", mysql_error(conn));
         exit(EXIT_FAILURE);
     }
 
+    // Connect to MySQL server
     if (!mysql_real_connect(conn, DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, 0, NULL, 0)) {
         fprintf(stderr, "Error connecting to MySQL: %s\n", mysql_error(conn));
         mysql_close(conn);
         exit(EXIT_FAILURE);
     }
 
+     // Display menu and get user choice
     int choice;
     do {
         printf("\nSelect an option:\n");
@@ -114,6 +125,7 @@ int main() {
         }
     } while (choice != 3);
 
+    // Close MySQL connection
     mysql_close(conn);
     return EXIT_SUCCESS;
 }
